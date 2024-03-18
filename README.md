@@ -1,0 +1,2 @@
+# Temperatura
+Simulador de temperatura
