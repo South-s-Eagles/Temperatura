@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:8.1.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: temperatura
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./bd/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+
+  python:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: python
+    depends_on:
+      - mysql
+
+volumes:
+  db_data:
+

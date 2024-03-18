@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS temperatura (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    graus FLOAT,
+    data DATETIME
+);
