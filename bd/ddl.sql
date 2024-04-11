@@ -3,3 +3,9 @@ CREATE TABLE IF NOT EXISTS temperatura (
     graus FLOAT,
     data DATETIME
 );
+
+CREATE TABLE IF NOT EXISTS sensor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bateria FLOAT,
+    data DATETIME
+);
