@@ -1,33 +1,6 @@
-import mysql.connector
+import conexaoBanco
 import random
 import matplotlib.pyplot as plt
-
-def conectar_bd(AMBIENTE_DOCKER):
-    if AMBIENTE_DOCKER:
-        HOST = "mysql"
-        USER = "root"
-        PORT = "3306"
-        PASSWORD = "123456"
-        DATABASE = "temperatura"
-    else:
-        HOST = "localhost"
-        USER = "root"
-        PORT = "3306"
-        PASSWORD = "123456"
-        DATABASE = "temperatura"
-
-    try:
-        CONEXAO = mysql.connector.connect(
-             host=HOST,
-             user=USER,
-             port=PORT,
-             password=PASSWORD,
-             database=DATABASE
-        )
-        return CONEXAO
-    except Exception as E:
-        print(f"Erro ao conectar ao banco de dados: {E}")
-        return None
 
 def inserir_dados(CONEXAO, listaCaptura):
     try:
@@ -104,4 +77,5 @@ def capturar_dados(AMBIENTE_DOCKER):
         gerar_grafico(temperaturas, horas)
 
 AMBIENTE_DOCKER = False
+CONEXAO = conexaoBanco.conectar_bd(AMBIENTE_DOCKER)
 capturar_dados(AMBIENTE_DOCKER)
