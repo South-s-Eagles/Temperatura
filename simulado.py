@@ -1,6 +1,7 @@
 import conexaoBanco
 import random
 import matplotlib.pyplot as plt
+import mysql.connector
 
 def inserir_dados(CONEXAO, listaCaptura):
     try:
@@ -51,7 +52,7 @@ def gerar_grafico(temperaturas, horas):
     plt.show()
 
 def capturar_dados(AMBIENTE_DOCKER):
-    CONEXAO = conectar_bd(AMBIENTE_DOCKER)
+    CONEXAO = conexaoBanco.conectar_bd(AMBIENTE_DOCKER)
     dados = random.uniform(35.97, 36.5), 0, 0, 0
     quantidade_iteracoes = 0
     listaCaptura = []
@@ -77,5 +78,5 @@ def capturar_dados(AMBIENTE_DOCKER):
         gerar_grafico(temperaturas, horas)
 
 AMBIENTE_DOCKER = False
-CONEXAO = conexaoBanco.conectar_bd(AMBIENTE_DOCKER)
+CONEXAO = conexaoBanco.conectar_bd(1)
 capturar_dados(AMBIENTE_DOCKER)

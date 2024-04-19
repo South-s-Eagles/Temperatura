@@ -1,18 +1,19 @@
 import mysql.connector
+import datetime
 
-def conectar_bd(AMBIENTE_DOCKER):
-    if AMBIENTE_DOCKER:
-        HOST = "mysql",
-        USER = "root",
-        PORT = "3306",
-        PASSWORD = "123456",
-        DATABASE = "temperatura"
+def conectar_bd(AMBIENTE):
+    if AMBIENTE == 1:
+        HOST = "temperatura"
+    elif AMBIENTE == 2:
+        HOST = "localhost"
     else:
-        HOST = "localhost",
-        USER = "root",
-        PORT = "3306",
-        PASSWORD = "123456",
-        DATABASE = "temperatura"
+        print("Ambiente não definido.")
+        return None
+        
+    USER = "root"
+    PORT = "3306"
+    PASSWORD = "123456"
+    DATABASE = "temperatura"
 
     try:
         CONEXAO = mysql.connector.connect(
@@ -27,7 +28,7 @@ def conectar_bd(AMBIENTE_DOCKER):
         print(f"Erro ao conectar ao banco de dados: {E}")
         return None
 
-def inserir_dados(CONEXAO, listaCaptura):
+def inserir_dados(CONEXAO, listaCaptura, bateria):
     try:
         cursor = CONEXAO.cursor()
         cursor.execute(
@@ -37,6 +38,11 @@ def inserir_dados(CONEXAO, listaCaptura):
             ({}, '{}');"""
             .format(listaCaptura[0]["graus"], listaCaptura[0]["data_atual"]
                     , listaCaptura[1]["graus"], listaCaptura[1]["data_atual"])
+            )
+        cursor.execute(
+            """INSERT INTO sensor (graus, data)
+            VALUE
+            ({});""".format(bateria, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             )
         CONEXAO.commit()
         cursor.close()
