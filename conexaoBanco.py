@@ -1,14 +1,14 @@
 import mysql.connector
 import datetime
 
-def conectar_bd(AMBIENTE):
-    if AMBIENTE == 1:
+
+def conectar_bd():
+    AMBIENTE_DOCKER = True
+
+    if AMBIENTE_DOCKER:
         HOST = "temperatura"
-    elif AMBIENTE == 2:
-        HOST = "localhost"
     else:
-        print("Ambiente não definido.")
-        return None
+        HOST = "localhost"
         
     USER = "root"
     PORT = "3306"
