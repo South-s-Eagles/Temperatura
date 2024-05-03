@@ -69,7 +69,7 @@ Parameters:
   Ec2JupyterPassword:
     Type: String
     NoEcho: true
-    Description: urubu100
+    Description: Aqui será a senha do Jupyter
 Resources:
   Vpc:
     Type: AWS::EC2::VPC
